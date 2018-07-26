@@ -2,6 +2,12 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.1'
+# jquery
+gem 'jquery-rails'
+# bootstrap
+gem 'bootstrap-sass', '~> 3.3.7'
+# pagination
+gem 'kaminari'
 # photouploader
 gem 'carrierwave'
 # fakeinformationpoducer
