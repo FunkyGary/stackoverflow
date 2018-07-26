@@ -14,5 +14,13 @@ User.destroy_all
     email: FFaker::Internet.email,
     password: 12345678
   )
-  puts "Created fake #{User.count} Uers"
 end
+puts "Created fake #{User.count} Uers"
+
+User.create(
+  name: "admin",
+  email: "root@admin.com",
+  password: "12345678",
+  role: "admin",
+)
+puts "Default admin created!"
