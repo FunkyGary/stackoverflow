@@ -19,6 +19,9 @@
         <em><%= answer.created_at.to_time.to_s.split('+').first %> </em>
       </p>
     </div>
+    <% if current_user %>
+      <%= link_to "Delete", question_answer_path(@question, answer), method: :delete %>
+    <% end %>
     <hr>
     <% end %>
     </div>
