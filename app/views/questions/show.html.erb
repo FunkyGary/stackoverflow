@@ -11,18 +11,20 @@
        <%= f.submit "Posr Your Answer",class: "btn btn-primary" %>
      </div>
    <% end %>
-   <% @question.answers.each do |answer| %>
-    <div>
-      <h4><%= answer.user.name %></h4>
-      <p><%= simple_format answer.content %></p>
-      <p class="text-muted">
-        <em><%= answer.created_at.to_time.to_s.split('+').first %> </em>
-      </p>
-    </div>
-    <% if current_user %>
-      <%= link_to "Delete", question_answer_path(@question, answer), method: :delete %>
-    <% end %>
-    <hr>
+   <% if current_user %>
+     <% @question.answers.each do |answer| %>
+      <div>
+        <h4><%= answer.user.name %></h4>
+        <p><%= simple_format answer.content %></p>
+        <p class="text-muted">
+          <em><%= answer.created_at.to_time.to_s.split('+').first %> </em>
+          <% if current_user == answer.user %>
+            <%= link_to "Delete", question_answer_path(@question, answer), method: :delete %>
+          <% end %>
+        </p>
+      </div>
+      <hr>
+      <% end %>
     <% end %>
     </div>
   </div>

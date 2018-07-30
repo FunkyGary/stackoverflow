@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :questions, only: [:index, :show, :create, :destroy] do
     resources :answers, only: [:create, :destroy]
   end
+  resources :users
   root "questions#index"
 
   namespace :admin do

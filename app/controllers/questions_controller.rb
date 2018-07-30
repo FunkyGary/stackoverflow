@@ -1,9 +1,10 @@
 class QuestionsController < ApplicationController
-  before_action :set_question, only: [:show]
+  before_action :set_question, only: [:show, :destroy]
 
   def index
     @question = Question.new
     @questions = Question.all
+    @user = current_user
   end
 
   def show
@@ -19,6 +20,14 @@ class QuestionsController < ApplicationController
     else
       flash.now[:alert] = "Question was failed to create"
       render :index
+    end
+  end
+
+  def destroy
+
+    if current_user
+      @question.destroy
+      redirect_to root_path
     end
   end
 
