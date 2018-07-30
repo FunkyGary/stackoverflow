@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-2">
-    <h4>favorite</h4>
+    <h4><%= link_to 'Favorite', favorite_question_path(question), method: :post %></h4>
   </div>
   <div class="col-md-2">
     <h4><%= link_to "answer", question_path(question) %></h4>

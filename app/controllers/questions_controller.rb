@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  before_action :set_question, only: [:show, :destroy]
+  before_action :set_question, only: [:show, :destroy, :favorite, :unfavorite]
 
   def index
     @question = Question.new
@@ -29,6 +29,17 @@ class QuestionsController < ApplicationController
       @question.destroy
       redirect_to root_path
     end
+  end
+
+  def favorite
+    @question.favorites.create!(user: current_user)
+    redirect_back(fallback_location: root_path)
+  end
+
+  def unfavorite
+    favorites = Favorite.where(question: @question, user: current_user).first
+    favorites.destroy
+    redirect_back(fallback_loction: root_path)
   end
 
   private
