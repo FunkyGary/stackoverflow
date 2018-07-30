@@ -39,7 +39,7 @@ class QuestionsController < ApplicationController
   def unfavorite
     favorites = Favorite.where(question: @question, user: current_user).first
     favorites.destroy
-    redirect_back(fallback_loction: root_path)
+    redirect_back(fallback_location: root_path)
   end
 
   private
