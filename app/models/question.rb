@@ -8,4 +8,15 @@ class Question < ApplicationRecord
   def is_favorited?(user)
     self.favorited_users.include?(user)
   end
+  def is_upvoted?(user)
+    self.upvoted_users.include?(user)
+  end
+  def count_favorites
+    self.favorites_count = self.favorites.size
+    self.save
+  end
+  def count_upvotes
+    self.upvotes_count = self.upvotes.size
+    self.save
+  end
 end

@@ -16,7 +16,13 @@
       <div>
         <h4><%= answer.user.name %></h4>
         <p><%= simple_format answer.content %></p>
-        <p class="text-muted">
+        <p class="text-muted text-right">
+          <%= answer.upvotes_count%>
+          <% if answer.is_upvoted?(current_user) %>
+            <%= link_to 'Downvote', downvote_question_answer_path(question), method: :post %>
+          <% else %>
+            <%= link_to 'Upvote', upvote_question_answer_path(question), method: :post %>
+          <% end %>
           <em><%= answer.created_at.to_time.to_s.split('+').first %> </em>
           <% if current_user == answer.user %>
             <%= link_to "Delete", question_answer_path(@question, answer), method: :delete %>

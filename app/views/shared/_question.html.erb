@@ -1,20 +1,27 @@
 <div class="row">
   <div class="col-md-2">
+    <h4 class="text-center"><%= question.favorites_count%></h4>
     <% if question.is_favorited?(current_user) %>
-      <h4><%= link_to 'Unfavorite', unfavorite_question_path(question), method: :post %></h4>
+      <h4 class="text-center"><%= link_to 'Unfavorite', unfavorite_question_path(question), method: :post %></h4>
     <% else %>
-      <h4><%= link_to 'Favorite', favorite_question_path(question), method: :post %></h4>
+      <h4 class="text-center"><%= link_to 'Favorite', favorite_question_path(question), method: :post %></h4>
     <% end %>
   </div>
   <div class="col-md-2">
-    <h4><%= link_to "answer", question_path(question) %></h4>
+    <h4 class="text-center"><%= question.answers.size%></h4>
+    <h4 class="text-center"><%= link_to "Answer", question_path(question) %></h4>
   </div>
   <div class="col-md-2">
-    <h4>upvote</h4>
+    <h4 class="text-center"><%= question.upvotes_count%></h4>
+    <% if question.is_upvoted?(current_user) %>
+      <h4 class="text-center"><%= link_to 'Downvote', downvote_question_path(question), method: :post %></h4>
+    <% else %>
+      <h4 class="text-center"><%= link_to 'Upvote', upvote_question_path(question), method: :post %></h4>
+    <% end %>
   </div>
   <div class="col-md-6">
-    <h2><%= question.title %></h2>
-    <h3><%= simple_format question.description %></h3>
+    <h2><%= link_to question.title, question_path(question) %></h2>
+    <h3><%= simple_format question.description.truncate(100) %></h3>
     <p class="text-right">
       <%= link_to question.user.name, user_path(question.user) %> , <%= question.created_at.to_time.to_s.split('+').first %>
       <% if current_user %>
