@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.1'
+# debug
+gem 'pry', '~> 0.10.3'
 # jquery
 gem 'jquery-rails'
 # bootstrap

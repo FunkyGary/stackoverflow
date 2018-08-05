@@ -9,6 +9,7 @@ class QuestionsController < ApplicationController
 
   def show
     @answer = Answer.new
+    @answers = Answer.order(upvotes_count: :desc)
   end
 
   def create
@@ -24,7 +25,6 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-
     if current_user
       @question.destroy
       redirect_to root_path
@@ -32,14 +32,18 @@ class QuestionsController < ApplicationController
   end
 
   def favorite
-    @question.favorites.create!(user: current_user)
-    @question.count_favorites
-    redirect_back(fallback_location: root_path)
+    if user_signed_in?
+      @question.favorites.create!(user: current_user)
+      @question.count_favorites
+      redirect_back(fallback_location: root_path)
+    else
+      redirect_to user_session_path
+    end
   end
 
   def unfavorite
-    favorites = Favorite.where(question: @question, user: current_user).first
-    favorites.destroy
+    favorite = Favorite.where(question: @question, user: current_user).first
+    favorite.destroy
     @question.count_favorites
     redirect_back(fallback_location: root_path)
   end
@@ -51,8 +55,8 @@ class QuestionsController < ApplicationController
   end
 
   def downvote
-    upvotes = Upvote.where(question: @question, user: current_user).first
-    upvotes.destroy
+    upvote = Upvote.where(question: @question, user: current_user).first
+    upvote.destroy
     @question.count_upvotes
     redirect_back(fallback_location: root_path)
   end

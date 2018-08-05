@@ -18,15 +18,15 @@ class AnswersController < ApplicationController
   end
 
   def upvote
-    @answer.upvotes.create!(user: current_user)
-    @answer.count_upvotes
+    @answer.anupvotes.create!(user: current_user)
+    @answer.count_answer_upvotes
     redirect_back(fallback_location: root_path)
   end
 
   def downvote
-    upvotes = Upvote.where(answer: @answer, user: current_user).first
-    upvotes.destroy
-    @answer.count_upvotes
+    upvote = Anupvote.where(answer: @answer, user: current_user).first
+    upvote.destroy
+    @answer.count_answer_upvotes
     redirect_back(fallback_location: root_path)
   end
 

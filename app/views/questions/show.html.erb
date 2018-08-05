@@ -12,16 +12,16 @@
      </div>
    <% end %>
    <% if current_user %>
-     <% @question.answers.each do |answer| %>
+     <% @answers.each do |answer| %>
       <div>
         <h4><%= answer.user.name %></h4>
         <p><%= simple_format answer.content %></p>
         <p class="text-muted text-right">
           <%= answer.upvotes_count%>
           <% if answer.is_upvoted?(current_user) %>
-            <%= link_to 'Downvote', downvote_question_answer_path(question), method: :post %>
+            <%= link_to 'Downvote', downvote_question_answer_path(@question, answer), method: :post %>
           <% else %>
-            <%= link_to 'Upvote', upvote_question_answer_path(question), method: :post %>
+            <%= link_to 'Upvote', upvote_question_answer_path(@question, answer), method: :post %>
           <% end %>
           <em><%= answer.created_at.to_time.to_s.split('+').first %> </em>
           <% if current_user == answer.user %>
