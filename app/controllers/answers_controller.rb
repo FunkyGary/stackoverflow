@@ -18,16 +18,24 @@ class AnswersController < ApplicationController
   end
 
   def upvote
-    @answer.anupvotes.create!(user: current_user)
-    @answer.count_answer_upvotes
-    redirect_back(fallback_location: root_path)
+    if user_signed_in?
+      @answer.anupvotes.create!(user: current_user)
+      @answer.count_answer_upvotes
+      redirect_back(fallback_location: root_path)
+    else
+      redirect_to user_session_path
+    end
   end
 
   def downvote
-    upvote = Anupvote.where(answer: @answer, user: current_user).first
-    upvote.destroy
-    @answer.count_answer_upvotes
-    redirect_back(fallback_location: root_path)
+    if user_signed_in?
+      upvote = Anupvote.where(answer: @answer, user: current_user).first
+      upvote.destroy
+      @answer.count_answer_upvotes
+      redirect_back(fallback_location: root_path)
+    else
+      redirect_to user_session_path
+    end
   end
 
   private

@@ -49,9 +49,13 @@ class QuestionsController < ApplicationController
   end
 
   def upvote
-    @question.upvotes.create!(user: current_user)
-    @question.count_upvotes
-    redirect_back(fallback_location: root_path)
+    if user_signed_in?
+      @question.upvotes.create!(user: current_user)
+      @question.count_upvotes
+      redirect_back(fallback_location: root_path)
+    else
+      redirect_to user_session_path
+    end
   end
 
   def downvote
