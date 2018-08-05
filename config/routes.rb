@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     resources :answers, only: [:create, :destroy] do
       member do
         post :upvote
-        post :downvote 
+        post :downvote
       end
     end
     member do
@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     end
   end
   resources :users
+  resources :favorites, :only => :index
   root "questions#index"
 
   namespace :admin do

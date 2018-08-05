@@ -24,3 +24,21 @@ User.create(
   role: "admin",
 )
 puts "Default admin created!"
+
+User.all.each do |user|
+  user.questions.create!(
+    title:  FFaker::LoremCN.sentence,
+    description: FFaker::LoremCN.paragraph
+  )
+end
+puts "have created fake questions"
+puts "now you have #{Question.count} comment data"
+
+Question.all.each do |question|
+  question.answers.create!(
+    user: User.all.sample,
+    content: FFaker::LoremCN.sentences
+  )
+end
+puts "have created fake answers"
+puts "now you have #{Answer.count} comment data"
