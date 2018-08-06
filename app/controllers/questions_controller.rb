@@ -9,7 +9,7 @@ class QuestionsController < ApplicationController
 
   def show
     @answer = Answer.new
-    @answers = Answer.order(upvotes_count: :desc)
+    @answers = @question.answers.order(upvotes_count: :desc)
   end
 
   def create

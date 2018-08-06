@@ -28,7 +28,7 @@ puts "Default admin created!"
 User.all.each do |user|
   user.questions.create!(
     title:  FFaker::LoremCN.sentence,
-    description: FFaker::LoremCN.paragraph
+    description: FFaker::LoremCN.paragraph,
   )
 end
 puts "have created fake questions"
