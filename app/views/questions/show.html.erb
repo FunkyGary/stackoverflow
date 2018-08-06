@@ -13,7 +13,7 @@
        </div>
        <% end %>
        <% else %>
-        <h2 class="text-center">Please log in to anser the questions.</h2>
+        <h2 class="text-center">Please <%= link_to 'log in',user_session_path %> to answer the questions.</h2>
     <% end %>
     <h1>Answers:</h1>
     <% @answers.each do |answer| %>

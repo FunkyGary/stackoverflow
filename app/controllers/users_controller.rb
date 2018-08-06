@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
 
+  def show
+    @user.count_totalupvotes
+  end
+  
   def edit
     if @user.id != current_user.id
       redirect_to user_path(@user)

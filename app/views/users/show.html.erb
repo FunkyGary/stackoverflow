@@ -8,15 +8,40 @@
       <h2><strong>個人介紹:</strong></h2>
       <h4><%= @user.intro %></h4>
     </div>
-    <div class="col-md-12">
-      <div class="well">
-        <ul class="list-unstyled">
-          <li><strong>職稱:</strong> <%= @user.title %></li>
-          <li><strong>公司:</strong> <%= @user.company %></li>
-          <li><strong>網站：</strong> <%= @user.website %></li>
-          <li><strong>Twitter:</strong> <%= @user.twitter %></li>
-          <li><strong>Github:</strong> <%= @user.github %></li>
-        </ul>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="well">
+          <ul class="list-unstyled">
+            <li><strong>職稱:</strong> <%= @user.title %></li>
+            <li><strong>公司:</strong> <%= @user.company %></li>
+            <li><strong>網站：</strong> <%= @user.website %></li>
+            <li><strong>Twitter:</strong> <%= @user.twitter %></li>
+            <li><strong>Github:</strong> <%= @user.github %></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="well">
+          <ul class="list-unstyled">
+            <li><strong>Questions:</strong> <%= @user.questions.size %></li>
+            <li><strong>Answers:</strong> <%= @user.answers.size %></li>
+            <li><strong>Question with the most upvote:</strong>
+              <% if @user.questions.size > 0 %>
+                <%= @user.questions.order(upvotes_count: :desc).first.upvotes_count %>
+              <% else %>
+                0
+              <% end %>
+            </li>
+            <li><strong>Answer with the most upvote:</strong>
+              <% if @user.answers.size > 0 %>
+                <%= @user.answers.order(upvotes_count: :desc).first.upvotes_count %>
+              <% else %>
+                0
+              <% end %>
+            </li>
+            <li><strong>Total upvotes: </strong><%= @user.totalupvotes %></li>
+          </ul>
+        </div>
       </div>
       <% if @user == current_user %>
         <%= link_to 'Edit Profile', edit_user_path(current_user), class: "btn btn-primary" %>
