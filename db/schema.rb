@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_06_163845) do
+ActiveRecord::Schema.define(version: 2018_08_21_153032) do
 
   create_table "answers", force: :cascade do |t|
     t.integer "user_id"
@@ -46,6 +46,15 @@ ActiveRecord::Schema.define(version: 2018_08_06_163845) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "sessions", force: :cascade do |t|
+    t.string "session_id", null: false
+    t.text "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["session_id"], name: "index_sessions_on_session_id", unique: true
+    t.index ["updated_at"], name: "index_sessions_on_updated_at"
+  end
+
   create_table "upvotes", force: :cascade do |t|
     t.integer "user_id"
     t.integer "question_id"
@@ -76,6 +85,8 @@ ActiveRecord::Schema.define(version: 2018_08_06_163845) do
     t.string "avator"
     t.string "name"
     t.integer "totalupvotes"
+    t.string "provider", limit: 50, default: "", null: false
+    t.string "uid", limit: 500, default: "", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
