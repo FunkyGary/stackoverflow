@@ -18,7 +18,6 @@ Rails.application.routes.draw do
   resources :users
   resources :favorites, :only => :index
   root "questions#index"
-
   namespace :admin do
     root "questions#index"
   end
